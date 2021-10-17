@@ -1,0 +1,25 @@
+{% extends "network/layout.html" %}
+{% load static%}
+
+{% block body %}
+
+
+<div class="container-sm">
+    <h6>New Post</h6>
+    {% if messages %}
+        {% for message in messages %}
+        <div class="alert alert-{{ message.tags }} col-sm-2">
+            <small>{{ message }}</small>
+          </div>
+        {% endfor %}
+    {% endif %}
+    <form action="{% url 'create' %}" method="POST">
+        {% csrf_token %}
+        <textarea name="content" class="form-control" id="content"></textarea>
+        <span>
+            <button class="btn btn-primary btn-sm mb-3 mt-3" type="submit" id="post_btn">Post</button>
+            <a href="{% url 'index' %}" class="btn btn-sm btn-secondary">Cancel</a>
+        </span>
+    </form>
+</div>
+{% endblock %}
